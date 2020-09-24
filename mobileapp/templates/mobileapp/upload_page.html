@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon03">Загрузить</button>
+      </div>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" name="myfile">
+        <label class="custom-file-label" for="inputGroupFile03">Выбрать файл</label>
+      </div>
+    </div>
+</form>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message == "Ошибка загрузки" %}
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ message }}</strong>
+        {% else %}
+        <div class="alert alert-success" role="alert">
+            <strong>Готово!</strong> {{ message }}
+        {% endif %}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+<!--# Запись имени файла в строку-->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+
+<script>
+    $('#inputGroupFile03').on('change', function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    })
+</script>
+
+{% endblock %}

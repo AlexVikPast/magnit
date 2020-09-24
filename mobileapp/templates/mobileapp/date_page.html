@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if context %}
+
+<form method="post">{% csrf_token %}
+    <div>
+        <label for="party">Укажите дату события больше {{context}}</label>
+        <input type="date" id="party" name="party" min="{{context}}">
+        <button type="submit" class="btn btn-primary" name="ttt">Передать</button>
+    </div>
+</form>
+
+{% endif %}
+
+{% if list_product %}
+    <div class="alert alert-success" role="success">
+        <strong>
+    {% for lst in list_product %}
+        Рекомендуем купить, у вас закончился продукт ---> {{ lst }}<br>
+    {% endfor %}
+        </strong>
+{% endif %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+            <strong>{{ message }}</strong>
+    {% endfor %}
+{% endif %}
+
+
+
+
+{% endblock %}

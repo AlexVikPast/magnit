@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!--# вывод продукта - таблица-->
+{% if product %}
+<table class="table table-striped table-light table-bordered table-hover table-sm">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Товар</th>
+      <th>Количество</th>
+      <th>Дата</th>
+    </tr>
+
+
+    {% for pr in product %}
+
+  <tbody>
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ pr.title }}</td>
+      <td>{{ pr.count }}</td>
+      <td>{{ pr.purchase_date }}</td>
+    </tr>
+  </tbody>
+
+    {% endfor %}
+
+</table>
+
+{% else %}
+
+<div class="alert alert-danger" role="alert">
+  <H1>
+  <p class="text-center font-weight-bold">В базе записей нет</p>
+  </H1>
+</div>
+
+{% endif %}
+
+{% endblock %}
